@@ -1,11 +1,11 @@
 <?php
 
-namespace Nascom\TeamleaderApiClient\Serializer\FieldDescription;
+namespace Dropsolid\UnomiSdkPhp\Serializer\FieldDescription;
 
 /**
  * Class Field
  *
- * @package Nascom\TeamleaderApiClient\Serializer\FieldDescription
+ * @package Dropsolid\UnomiSdkPhp\Serializer\FieldDescription
  */
 class Field
 {

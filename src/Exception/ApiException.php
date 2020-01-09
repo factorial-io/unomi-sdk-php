@@ -1,11 +1,11 @@
 <?php
 
-namespace Nascom\TeamleaderApiClient\Exception;
+namespace Dropsolid\UnomiSdkPhp\Exception;
 
 /**
  * Class ApiException
  *
- * @package Nascom\TeamleaderApiClient\Exception
+ * @package Dropsolid\UnomiSdkPhp\Exception
  */
 class ApiException extends \Exception
 {

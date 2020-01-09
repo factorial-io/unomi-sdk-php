@@ -1,11 +1,11 @@
 <?php
 
-namespace Nascom\TeamleaderApiClient\Request;
+namespace Dropsolid\UnomiSdkPhp\Request;
 
 /**
  * Interface RequestInterface
  *
- * @package Nascom\TeamleaderApiClient\Request
+ * @package Dropsolid\UnomiSdkPhp\Request
  */
 interface RequestInterface
 {

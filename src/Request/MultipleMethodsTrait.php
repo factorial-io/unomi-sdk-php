@@ -1,11 +1,11 @@
 <?php
 
-namespace Nascom\TeamleaderApiClient\Request;
+namespace Dropsolid\UnomiSdkPhp\Request;
 
 /**
  * Trait MultipleMethodsTrait
  *
- * @package Nascom\TeamleaderApiClient\Request
+ * @package Dropsolid\UnomiSdkPhp\Request
  */
 trait MultipleMethodsTrait {
     /**

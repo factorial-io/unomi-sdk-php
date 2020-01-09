@@ -1,13 +1,13 @@
 <?php
 
-namespace Nascom\TeamleaderApiClient\Request;
+namespace Dropsolid\UnomiSdkPhp\Request;
 
 /**
  * Interface SupportsMultipleMethods
  *
  * Used to indicate requests that support multiple methods.
  *
- * @package Nascom\TeamleaderApiClient\Request
+ * @package Dropsolid\UnomiSdkPhp\Request
  */
 interface SupportsMultipleMethods
 {

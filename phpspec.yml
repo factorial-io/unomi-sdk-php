@@ -1,6 +1,6 @@
 suites:
-    TeamleaderApiClient:
-        namespace: Nascom\TeamleaderApiClient
-        psr4_prefix: Nascom\TeamleaderApiClient
+    UnomiSdkPhp:
+        namespace: Dropsolid\UnomiSdkPhp
+        psr4_prefix: Dropsolid\UnomiSdkPhp
 
 formatter.name: pretty

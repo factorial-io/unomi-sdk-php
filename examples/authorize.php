@@ -1,8 +1,10 @@
 <?php
 
+require_once(getcwd() . "/../vendor/autoload.php");
+require_once(getcwd() . "/authorize.php");
+
 use League\OAuth2\Client\Provider\AbstractProvider;
 
-require_once 'vendor/autoload.php';
 
 /**
  * @param AbstractProvider $provider

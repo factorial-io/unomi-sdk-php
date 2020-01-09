@@ -1,14 +1,14 @@
 <?php
 
-namespace Nascom\TeamleaderApiClient\Http\ApiClient;
+namespace Dropsolid\UnomiSdkPhp\Http\ApiClient;
 
-use Nascom\TeamleaderApiClient\Request\RequestInterface;
+use Dropsolid\UnomiSdkPhp\Request\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
 /**
  * Interface ApiClientInterface
  *
- * @package Nascom\TeamleaderApiClient\Http
+ * @package Dropsolid\UnomiSdkPhp\Http
  */
 interface ApiClientInterface
 {

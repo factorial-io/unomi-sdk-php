@@ -1,6 +1,6 @@
 <?php
 
-namespace Nascom\TeamleaderApiClient\Serializer;
+namespace Dropsolid\UnomiSdkPhp\Serializer;
 
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -9,7 +9,7 @@ use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 /**
  * Class ParseDataDenormalizer
  *
- * @package Nascom\TeamleaderApiClient\Serializer
+ * @package Dropsolid\UnomiSdkPhp\Serializer
  */
 class ParseDataDenormalizer implements
     DenormalizerInterface,

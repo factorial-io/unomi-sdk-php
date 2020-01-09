@@ -1,13 +1,13 @@
 <?php
 
-namespace Nascom\TeamleaderApiClient\Serializer\FieldDescription;
+namespace Dropsolid\UnomiSdkPhp\Serializer\FieldDescription;
 
 use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
 
 /**
  * Class FieldDescriptionBase
  *
- * @package Nascom\TeamleaderApiClient\Serializer\FieldDescription
+ * @package Dropsolid\UnomiSdkPhp\Serializer\FieldDescription
  */
 abstract class FieldDescriptionBase implements FieldDescriptionInterface
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace Nascom\TeamleaderApiClient\Request;
+namespace Dropsolid\UnomiSdkPhp\Request;
 
 /**
  * Class GetRequest
  *
- * @package Nascom\TeamleaderApiClient\Request
+ * @package Dropsolid\UnomiSdkPhp\Request
  */
 abstract class GetRequest extends BaseRequest
 {

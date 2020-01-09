@@ -1,6 +1,6 @@
 <?php
 
-namespace Nascom\TeamleaderApiClient\Serializer\FieldDescription;
+namespace Dropsolid\UnomiSdkPhp\Serializer\FieldDescription;
 
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
@@ -12,7 +12,7 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 /**
  * Class FieldDescriptionDenormalizer
  *
- * @package Nascom\TeamleaderApiClient\Serializer\FieldDescription
+ * @package Dropsolid\UnomiSdkPhp\Serializer\FieldDescription
  */
 class FieldDescriptionDenormalizer implements
     DenormalizerInterface,

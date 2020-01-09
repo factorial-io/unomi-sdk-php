@@ -1,16 +1,16 @@
 <?php
 
-namespace Nascom\TeamleaderApiClient\Repository;
+namespace Dropsolid\UnomiSdkPhp\Repository;
 
-use Nascom\TeamleaderApiClient\Http\ApiClient\ApiClientInterface;
-use Nascom\TeamleaderApiClient\Request\RequestInterface;
+use Dropsolid\UnomiSdkPhp\Http\ApiClient\ApiClientInterface;
+use Dropsolid\UnomiSdkPhp\Request\RequestInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 
 /**
  * Class RepositoryBase
  *
- * @package Nascom\TeamleaderApiClient\Repository
+ * @package Dropsolid\UnomiSdkPhp\Repository
  */
 abstract class RepositoryBase
 {
@@ -71,7 +71,6 @@ abstract class RepositoryBase
     {
         $response = $this->apiClient->handle($request);
         $responseBody = $response->getBody()->getContents();
-
         return $this->deserialize($responseBody, $responseClass);
     }
 }

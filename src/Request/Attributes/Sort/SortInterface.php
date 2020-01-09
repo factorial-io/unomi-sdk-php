@@ -1,11 +1,11 @@
 <?php
 
-namespace Nascom\TeamleaderApiClient\Request\Attributes\Sort;
+namespace Dropsolid\UnomiSdkPhp\Request\Attributes\Sort;
 
 /**
  * Interface SortInterface
  *
- * @package Nascom\TeamleaderApiClient\Request\Attributes\Sort
+ * @package Dropsolid\UnomiSdkPhp\Request\Attributes\Sort
  */
 interface SortInterface
 {

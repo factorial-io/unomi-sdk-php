@@ -1,6 +1,6 @@
 <?php
 
-namespace Nascom\TeamleaderApiClient\Http\Guzzle\Middleware;
+namespace Dropsolid\UnomiSdkPhp\Http\Guzzle\Middleware;
 
 use League\OAuth2\Client\Provider\AbstractProvider;
 use League\OAuth2\Client\Token\AccessToken;
@@ -9,7 +9,7 @@ use Psr\Http\Message\RequestInterface;
 /**
  * Class RefreshTokenMiddleware
  *
- * @package Nascom\TeamleaderApiClient\Http\Guzzle\Middleware
+ * @package Dropsolid\UnomiSdkPhp\Http\Guzzle\Middleware
  */
 class RefreshTokenMiddleware
 {
