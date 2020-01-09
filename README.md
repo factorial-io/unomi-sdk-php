@@ -1,11 +1,11 @@
-# TeamleaderApiClient
-PHP client to connect to the [Teamleader API][teamleader-docs].
+# Unomi SDK PHP
+PHP client to connect to the [Unomi API][unomi-docs].
 
 ## Installation
 The package is available via composer:
 
 ```Bash
-$ composer require nascom/teamleader-api-client
+$ composer require dropsolid/unomi-sdk-php
 ```
 
 ## Basic usage
@@ -18,20 +18,22 @@ A default implementation has been provided if you use [Guzzle][guzzle-homepage]
 
 ### Authentication
 
-The Teamleader API uses OAuth2.0 to authenticate requests. We rely on [The PHP
-league's OAuth2 client][league-oauth-homepage], with the third-party
-[Teamleader provider][teamleader-provider] to handle this.
+The Unomi API could have a middleware with OAuth2.0 in front or use simple basic auth. The API allows to use both and
+for the OAuth2 implementation we rely on [The PHP league's OAuth2 client][league-oauth-homepage]. This was optimized
+ for use with the third-party [Dropsolid Platform OAuth 2.0 provider][dropsolid-platform-oauth-2] to handle this.
 
 ```php
 <?php
 
-use Nascom\OAuth2\Client\Provider\Teamleader;
+use Dropsolid\OAuth2\Client\Provider\DropsolidPlatform;
 
-$provider = new Teamleader([
-    'clientId' => 'your-client-id',
-    'clientSecret' => 'your-client-secret',
-    'redirectUri' => 'http://example.com/your/redirect/uri'
-]);
+$provider = new DropsolidPlatform(
+    [
+        'clientId' => 'your-client-id',
+        'clientSecret' => 'your-client-secret',
+        'redirectUri' => 'your-local-redirect-url',
+    ]
+);
 ```
 
 You can use this provider to fetch an access token. See the
@@ -46,8 +48,17 @@ default factory has been provided.
 ```php
 <?php
 
-use Nascom\TeamleaderApiClient\Http\Guzzle\GuzzleApiClientFactory;
-use Nascom\TeamleaderApiClient\Http\ApiClient\ApiClient;
+use Dropsolid\OAuth2\Client\Provider\DropsolidPlatform;
+use Dropsolid\UnomiSdkPhp\Http\Guzzle\GuzzleApiClientFactory;
+
+$provider = new DropsolidPlatform(
+    [
+        'clientId' => 'your-client-id',
+        'clientSecret' => 'your-client-secret',
+        'redirectUri' => 'your-local-redirect-url',
+    ]
+);
+$accessToken = authorize($provider);
 
 // Instantiate the client using the default Guzzle implementation.
 $apiClient = GuzzleApiClientFactory::create(
@@ -55,6 +66,7 @@ $apiClient = GuzzleApiClientFactory::create(
     $accessToken,
     [ // Optional extra configuration.
         'timeout' => 3.0, 
+        'base_uri' => 'https://unomi.poc.qa.dropsolid-sites.com',
         'callback' => function($newActionToken) {
             // Do stuff with the new token
             // ...
@@ -71,151 +83,49 @@ $apiClient = new ApiClient(
 );
 ```
 
-### Making requests
-
-Once you have the API client set up, you can start making requests. This is done
-by passing a `Request` object to the client's `handle` method. A PSR-7
-`ResponseInterface` will be returned.
-
-All available requests can be found [here][request-list].
-
-```php
-<?php
-
-use Nascom\TeamleaderApiClient\Request\CRM\Companies\CompaniesAddRequest;
-use Nascom\TeamleaderApiClient\Request\CRM\Companies\CompaniesDeleteRequest;
-use Nascom\TeamleaderApiClient\Request\CRM\Companies\CompaniesInfoRequest;
-use Nascom\TeamleaderApiClient\Request\CRM\Companies\CompaniesListRequest;
-use Nascom\TeamleaderApiClient\Request\CRM\Companies\CompaniesUpdateRequest;
-
-// Performing a companies.add request
-$company = [
-    'name' => 'TeamLeader',
-    'emails' => [
-        ['type' => 'primary', 'email' => 'sales@teamleader.eu'],
-        ['type' => 'invoicing', 'email' => 'invoicing@teamleader.eu'],
-    ],
-    'language' => 'en',
-    'website' => 'https://teamleader.eu/',
-];
-$request = new CompaniesAddRequest($company);
-$response = $apiClient->handle($request);
-$linkedCompany = json_decode($response->getBody()->getContents(), true);
-
-// Performing a companies.info request
-$request = new CompaniesInfoRequest($linkedCompany['data']['id']);
-$response = $apiClient->handle($request);
-$company = json_decode($response->getBody()->getContents(), true)['data'];
-
-// Performing a companies.update request
-$company['custom_fields'][0]['value'] = 'New Custom Value';
-$request = new CompaniesUpdateRequest($company);
-$apiClient->handle($request);
-
-// Performing a companies.delete request
-$request = new CompaniesDeleteRequest($linkedCompany['data']['id']);
-$apiClient->handle($request);
-
-// Performing a companies.list request
-$request = new CompaniesListRequest();
-$response = $apiClient->handle($request);
-$companies = json_decode($response->getBody()->getContents());
-
-// Performing a companies.list request with filters, pagination and sorting
-$filters = [
-    'email' => [
-        'type' => 'primary',
-        'email' => 'info@example.org',
-    ],
-];
-$pagination = [
-    'size' => 5,
-    'number' => 1,
-];
-$sorting = [
-    'name' => 'asc',
-    'added_at' => 'desc',
-];
-$request = new CompaniesListRequest();
-$request->setPage($pagination);
-$request->setSort($sorting);
-$response = $apiClient->handle($request);
-$companies = json_decode($response->getBody()->getContents());
-```
-
-###  Using the repository classes
+### Making requests using the repository classes
 
 If you want to work with deserialized models, you can make use of the
-`Teamleader` class. This acts as a wrapper for the API. You'll need
+`Unomi` class. This acts as a wrapper for the API. You'll need
 to install [Symfony's Serializer component][symfony-serializer]
 (`symfony/serializer`) for this.
 
-
-Instantiate teamleader as shown below to make use of the repositories
+Instantiate Unomi as shown below to make use of the repositories
  
 ```php
-$teamleader = \Nascom\TeamleaderApiClient\Teamleader::withDefaultSerializer($apiClient);
+$unomi = Dropsolid\UnomiSdkPhp\Unomi::withDefaultSerializer($apiClient);
 ```
 
 ```php
 <?php
 
-use Nascom\TeamleaderApiClient\Model\Company\Company;
-use Nascom\TeamleaderApiClient\Model\Aggregate\Email;
+use Dropsolid\OAuth2\Client\Provider\DropsolidPlatform;
+use Dropsolid\UnomiSdkPhp\Http\Guzzle\GuzzleApiClientFactory;
 
-// Performing a companies.add request
-$company = new Company();
-$company->create('TeamLeader');
-$emails = [
-    new Email('sales@teamleader.eu', 'primary'),
-    new Email('invoicing@teamleader.eu', 'invoicing'),
+// Performing a segment.list request with offset
+$offset = [
+    'offset' => 0,
 ];
-$company->setEmails($emails);
-$company->setLanguage('en');
-$company->setWebsite('https://teamleader.eu/');
-$linkedCompany = $teamleader->companies()->addCompany($company);
 
-// Performing a companies.info request
-$company = $teamleader->companies()->getCompany($linkedCompany->getId());
+// Get all itemIds & conditions from all existing segments
+$segments = $unomi->segments()->listSegments($offset);
+foreach ($segments as $segmentMetadata) {
+    $id = $segmentMetadata->getId();
+    // Performing a segment.info request
+    $segment = $unomi->segments()->getSegment($id);
+    var_dump($segment->getItemId());
+    var_dump($segment->getCondition());
+}
 
-// Performing a companies.update request
-$customFields = $company->getCustomFields();
-$customFields[0]->setValue('New custom value');
-$company->setCustomFields($customFields);
-$teamleader->companies()->updateCompany($company);
-
-// Performing a companies.delete request
-$teamleader->companies()->deleteCompany($linkedCompany->getId());
-
-// Performing a companies.list request
-$companies = $teamleader->companies()->listCompanies();
-
-// Performing a companies.list request with filters, pagination and sorting
-$filters = [
-    'email' => [
-        'type' => 'primary',
-        'email' => 'info@example.org',
-    ],
-];
-$pagination = [
-    'size' => 5,
-    'number' => 1,
-];
-$sorting = [
-    'name' => 'asc',
-    'added_at' => 'desc',
-];
-$companies = $teamleader->companies()->listCompanies($filters, $pagination, $sorting);
 ```
 
 ###  Known issues
-The `timeTracking.info` request results in a `'400 Bad Request' response: {"errors":[{"code":0,"title":"Key id must be present","status":400,"meta":{"field":"id"}}]}`
+Only the listing of segments and the segment details are implemented so far.
 
-[teamleader-docs]: https://developer.teamleader.eu
+[unomi-docs]: https://unomi.apache.org/rest-api-doc/index.html
 [php-http-homepage]: http://docs.php-http.org/en/latest/
 [league-oauth-homepage]: http://oauth2-client.thephpleague.com/
-[teamleader-provider]: https://github.com/Nascom/oauth2-teamleader
+[dropsolid-platform-oauth-2]: https://gitlab.com/dropsolid/oauth2-dropsolid-platform
 [league-usage]: http://oauth2-client.thephpleague.com/usage/
 [guzzle-homepage]: https://github.com/guzzle/guzzle
 [symfony-serializer]: https://symfony.com/doc/current/components/serializer.html
-[request-list]: https://github.com/Nascom/TeamleaderApiClient/tree/v2/src/Request
