@@ -41,11 +41,14 @@ class GuzzleApiClientFactory
 
             $config['handler'] = $handler;
         }
+        if (!isset($config['options'])) {
+            $config['options'] = [];
+        }
 
         $httpClient = new GuzzleHttpClient($config);
         $psrClient = new Client($httpClient);
 
-        return new ApiClient($provider, $psrClient, $accessToken);
+        return new ApiClient($provider, $psrClient, $accessToken, $config);
     }
 
     /**
@@ -60,11 +63,14 @@ class GuzzleApiClientFactory
                 $config['callback'] = null;
             }
         }
+        if (!isset($config['options'])) {
+            $config['options'] = [];
+        }
 
         $httpClient = new GuzzleHttpClient($config);
         $psrClient = new Client($httpClient);
 
-        return new ApiClient(null, $psrClient, null);
+        return new ApiClient(null, $psrClient, null,  $config);
     }
 
     /**
