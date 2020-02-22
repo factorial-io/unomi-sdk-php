@@ -11,6 +11,7 @@
     "require": {
         "php-http/guzzle6-adapter": "^1.1",
         "php-http/discovery": "^1.4",
-        "guzzlehttp/guzzle": "^6.3"
+        "guzzlehttp/guzzle": "^6.3",
+        "dropsolid/unomi-sdk-php": "^1.0"
     }
 }

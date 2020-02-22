@@ -8,27 +8,11 @@ use Dropsolid\UnomiSdkPhp\Http\Guzzle\GuzzleApiClientFactory;
 
 session_start();
 
-/*$provider = new DropsolidPlatform(
-    [
-        'clientId' => 'your-client-id',
-        'clientSecret' => 'your-client-secret',
-        'redirectUri' => 'your-local-redirect-url',
-    ]
-);
-
-$accessToken = authorize($provider);
-
-$apiClient = GuzzleApiClientFactory::create(
-    $provider,
-    $accessToken,
-    ['timeout' => 3.0, 'base_uri' => 'https://unomi.poc.qa.dropsolid-sites.com']
-);*/
-
 $apiClient = GuzzleApiClientFactory::createBasicAuth(
     [
         'timeout' => 3.0,
         'base_uri' => 'localhost',
-        'auth' => ['username', 'password']
+        'auth' => ['karaf', 'karaf']
     ]
 );
 
@@ -48,4 +32,3 @@ foreach ($segments as $segmentMetadata) {
     var_dump($segment->getItemId());
     var_dump($segment->getCondition());
 }
-
