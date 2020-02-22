@@ -2,9 +2,13 @@
 
 namespace Dropsolid\UnomiSdkPhp\Http\Guzzle;
 
+use Dropsolid\UnomiSdkPhp\Http\Guzzle\Middleware\RefreshTokenMiddleware;
+use GuzzleHttp\HandlerStack;
 use Http\Adapter\Guzzle6\Client;
 use Dropsolid\UnomiSdkPhp\Http\ApiClient\ApiClient;
 use GuzzleHttp\Client as GuzzleHttpClient;
+use League\OAuth2\Client\Provider\AbstractProvider;
+use League\OAuth2\Client\Token\AccessToken;
 
 /**
  * Class GuzzleApiClientFactory
