@@ -42,7 +42,8 @@ abstract class FieldDescriptionBase implements FieldDescriptionInterface
      * @param array|string $value
      * @return Field
      */
-    protected function convertToField($key, $value) {
+    protected function convertToField($key, $value)
+    {
         // Set up the defaults.
         $fieldName = is_numeric($key) ? $value : $key;
         $getter = 'get' . $this->toUpperCamelCase($fieldName);

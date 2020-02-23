@@ -3,6 +3,7 @@
 namespace Dropsolid\UnomiSdkPhp\Http\ApiClient;
 
 use Dropsolid\UnomiSdkPhp\Request\RequestInterface;
+use Http\Client\Exception;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -15,7 +16,7 @@ interface ApiClientInterface
     /**
      * @param RequestInterface $request
      * @return ResponseInterface
-     * @throws \Http\Client\Exception
+     * @throws Exception
      */
     public function handle(RequestInterface $request);
 }

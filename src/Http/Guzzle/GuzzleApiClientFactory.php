@@ -9,6 +9,7 @@ use Dropsolid\UnomiSdkPhp\Http\ApiClient\ApiClient;
 use GuzzleHttp\Client as GuzzleHttpClient;
 use League\OAuth2\Client\Provider\AbstractProvider;
 use League\OAuth2\Client\Token\AccessToken;
+use League\OAuth2\Client\Token\AccessTokenInterface;
 
 /**
  * Class GuzzleApiClientFactory
@@ -36,61 +37,61 @@ class GuzzleApiClientFactory
         $httpClient = new GuzzleHttpClient($config);
         $psrClient = new Client($httpClient);
 
-        return new ApiClient(null, $psrClient, null,  $config);
+        return new ApiClient(null, $psrClient, null, $config);
     }
 
     /**
    * @param AbstractProvider $provider
-   * @param AccessToken|array $accessToken
+   * @param AccessTokenInterface|array $accessToken
    * @param array $config
    * @return ApiClient
    */
-  public static function createOAuth(
-    AbstractProvider $provider,
-    AccessToken $accessToken,
-    array $config = []
-  ) {
-    if (!isset($config['handler'])) {
-      if (!isset($config['callback'])) {
-        $config['callback'] = null;
-      }
-      $handler = self::initialiseHandlerStack(
-        $provider,
-        $accessToken,
-        $config['callback']
-      );
+    public static function createOAuth(
+        AbstractProvider $provider,
+        AccessTokenInterface $accessToken,
+        array $config = []
+    ) {
+        if (!isset($config['handler'])) {
+            if (!isset($config['callback'])) {
+                $config['callback'] = null;
+            }
+            $handler = self::initialiseHandlerStack(
+                $provider,
+                $accessToken,
+                $config['callback']
+            );
 
-      $config['handler'] = $handler;
+            $config['handler'] = $handler;
+        }
+        if (!isset($config['options'])) {
+            $config['options'] = [];
+        }
+
+        $httpClient = new GuzzleHttpClient($config);
+        $psrClient = new Client($httpClient);
+
+        return new ApiClient($provider, $psrClient, $accessToken, $config);
     }
-    if (!isset($config['options'])) {
-      $config['options'] = [];
-    }
-
-    $httpClient = new GuzzleHttpClient($config);
-    $psrClient = new Client($httpClient);
-
-    return new ApiClient($provider, $psrClient, $accessToken, $config);
-  }
 
   /**
    * @param AbstractProvider $provider
-   * @param AccessToken $accessToken
+   * @param AccessTokenInterface $accessToken
    * @param callable $refreshTokenCallback
    * @return HandlerStack
    */
-  protected static function initialiseHandlerStack(
-    AbstractProvider $provider,
-    AccessToken $accessToken,
-    callable $refreshTokenCallback = null
-  ) {
-    $handlerStack = HandlerStack::create();
-    $refreshMiddleware = new RefreshTokenMiddleware(
-      $provider,
-      $accessToken,
-      $refreshTokenCallback
-    );
-    $handlerStack->push($refreshMiddleware);
+    protected static function initialiseHandlerStack(
+        AbstractProvider $provider,
+        AccessTokenInterface $accessToken,
+        callable $refreshTokenCallback = null
+    ) {
+        $handlerStack = HandlerStack::create();
+        $refreshMiddleware = new RefreshTokenMiddleware(
+            $provider,
+            $accessToken,
+            $refreshTokenCallback
+        );
+        $handlerStack->push($refreshMiddleware);
 
-    return $handlerStack;
-  }
+        return $handlerStack;
+    }
 }

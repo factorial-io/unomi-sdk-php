@@ -3,6 +3,7 @@
 namespace Dropsolid\UnomiSdkPhp\Http\Guzzle\Middleware;
 
 use League\OAuth2\Client\Provider\AbstractProvider;
+use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use League\OAuth2\Client\Token\AccessToken;
 use Psr\Http\Message\RequestInterface;
 
@@ -58,7 +59,7 @@ class RefreshTokenMiddleware
     }
 
     /**
-     * @throws \League\OAuth2\Client\Provider\Exception\IdentityProviderException
+     * @throws IdentityProviderException
      */
     private function refreshToken()
     {

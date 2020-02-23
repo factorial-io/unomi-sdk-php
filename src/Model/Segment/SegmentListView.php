@@ -2,7 +2,6 @@
 
 namespace Dropsolid\UnomiSdkPhp\Model\Segment;
 
-
 /**
  * Class SegmentListView
  *

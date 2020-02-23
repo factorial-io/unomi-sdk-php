@@ -2,9 +2,6 @@
 
 namespace Dropsolid\UnomiSdkPhp\Model\Segment;
 
-use Dropsolid\UnomiSdkPhp\Model\Aggregate\AddressWithType;
-use Dropsolid\UnomiSdkPhp\Model\Aggregate\LinkedCustomField;
-
 /**
  * Class Segment
  *

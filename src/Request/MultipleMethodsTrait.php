@@ -7,7 +7,8 @@ namespace Dropsolid\UnomiSdkPhp\Request;
  *
  * @package Dropsolid\UnomiSdkPhp\Request
  */
-trait MultipleMethodsTrait {
+trait MultipleMethodsTrait
+{
     /**
      * @var string|null
      */

@@ -10,6 +10,7 @@ use Dropsolid\UnomiSdkPhp\Request\Attributes\Sort\SortInterface;
 use Dropsolid\UnomiSdkPhp\Request\Attributes\Offset\OffsetInterface;
 use Dropsolid\UnomiSdkPhp\Request\Attributes\Size\SizeInterface;
 use Dropsolid\UnomiSdkPhp\Request\RequestInterface;
+use League\OAuth2\Client\Token\AccessTokenInterface;
 
 /**
  * Class ApiClient
@@ -48,7 +49,7 @@ class ApiClient implements ApiClientInterface
      *
      * @param AbstractProvider|null $provider
      * @param HttpClient $httpClient
-     * @param AccessToken|null $accessToken
+     * @param AccessTokenInterface|null $accessToken
      * @param array $options
      *   An associative array of options. Supports the following values:
      *   - `default_method`: the default method to use when a requests supports
@@ -57,7 +58,7 @@ class ApiClient implements ApiClientInterface
     public function __construct(
         $provider,
         HttpClient $httpClient,
-        $accessToken,
+        AccessTokenInterface $accessToken,
         array $options = []
     ) {
         $this->httpClient = $httpClient;
@@ -71,7 +72,6 @@ class ApiClient implements ApiClientInterface
         $this->baseUri = isset($options['base_uri'])
             ? $options['base_uri']
             : $this->baseUri;
-
     }
 
     /**
@@ -112,13 +112,11 @@ class ApiClient implements ApiClientInterface
         if ($this->provider) {
             $psrRequest = $this->provider->getAuthenticatedRequest(
                 $request->getMethod() ?: $this->defaultMethod,
-                $this->baseUrl . $request->getEndpoint(),
+                $this->baseUri . $request->getEndpoint(),
                 $this->accessToken,
                 $options
             );
-        }
-        else {
-
+        } else {
             $psrRequest = new Request(
                 $request->getMethod() ?: $this->defaultMethod,
                 $this->baseUri . $request->getEndpoint(),
@@ -128,6 +126,5 @@ class ApiClient implements ApiClientInterface
         }
 
         return $this->httpClient->sendRequest($psrRequest);
-
     }
 }

@@ -4,6 +4,11 @@ namespace Dropsolid\UnomiSdkPhp\Repository;
 
 use Dropsolid\UnomiSdkPhp\Http\ApiClient\ApiClientInterface;
 use Dropsolid\UnomiSdkPhp\Request\RequestInterface;
+use Http\Client\Exception;
+use Symfony\Component\Serializer\Exception\CircularReferenceException;
+use Symfony\Component\Serializer\Exception\ExceptionInterface;
+use Symfony\Component\Serializer\Exception\InvalidArgumentException;
+use Symfony\Component\Serializer\Exception\LogicException;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 
@@ -52,6 +57,11 @@ abstract class RepositoryBase
     /**
      * @param $data
      * @param array $context
+     * @throws InvalidArgumentException   Occurs when the object given is not a supported type for the normalizer
+     * @throws CircularReferenceException Occurs when the normalizer detects a circular reference when no circular
+     *                                    reference handler can fix it
+     * @throws LogicException             Occurs when the normalizer is not called in an expected context
+     * @throws ExceptionInterface         Occurs for all the other cases of errors
      *
      * @return string|array
      */
@@ -65,7 +75,7 @@ abstract class RepositoryBase
      * @param $responseClass
      *
      * @return mixed
-     * @throws \Http\Client\Exception
+     * @throws Exception
      */
     protected function handleRequest(RequestInterface $request, $responseClass)
     {

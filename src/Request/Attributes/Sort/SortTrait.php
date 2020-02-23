@@ -29,5 +29,4 @@ trait SortTrait
     {
         return $this->sort;
     }
-
 }

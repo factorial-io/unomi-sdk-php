@@ -43,8 +43,8 @@ class FieldDescriptionDenormalizer implements
      */
     public function denormalize(
         $data,
-        $class,
-        $format = null,
+        string $class,
+        string $format = null,
         array $context = []
     ) {
         $fieldDescription = $this->getFieldDescriptionByClassName($class);
@@ -73,7 +73,7 @@ class FieldDescriptionDenormalizer implements
     /**
      * @inheritdoc
      */
-    public function supportsDenormalization($data, $type, $format = null)
+    public function supportsDenormalization($data, string $type, string $format = null)
     {
         return $this->getFieldDescriptionByClassName($type) !== null;
     }
@@ -81,7 +81,7 @@ class FieldDescriptionDenormalizer implements
     /**
      * @inheritdoc
      */
-    public function normalize($object, $format = null, array $context = [])
+    public function normalize($object, string $format = null, array $context = [])
     {
         $class = get_class($object);
         $fieldDescription = $this->getFieldDescriptionByClassName($class);
@@ -108,7 +108,7 @@ class FieldDescriptionDenormalizer implements
     /**
      * @inheritdoc
      */
-    public function supportsNormalization($data, $format = null)
+    public function supportsNormalization($data, string $format = null)
     {
         return is_object($data)
             && $this->getFieldDescriptionByClassName(get_class($data)) !== null;

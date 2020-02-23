@@ -33,7 +33,7 @@ class Segment
     /**
      * @var SegmentMetadata
      */
-    private  $metadata;
+    private $metadata;
 
     /**
      * @return string
@@ -114,10 +114,4 @@ class Segment
     {
         $this->metadata = $metadata;
     }
-
-
-
-
-
-
 }

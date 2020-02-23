@@ -6,7 +6,7 @@ use Dropsolid\UnomiSdkPhp\Model\Segment\Segment;
 use Dropsolid\UnomiSdkPhp\Model\Segment\SegmentListView;
 use Dropsolid\UnomiSdkPhp\Request\Segment\SegmentInfoRequest;
 use Dropsolid\UnomiSdkPhp\Request\Segment\SegmentListRequest;
-
+use Http\Client\Exception;
 
 /**
  * Class SegmentRepository
@@ -19,7 +19,7 @@ class SegmentRepository extends RepositoryBase
      * @param string $id
      *
      * @return Segment
-     * @throws \Http\Client\Exception
+     * @throws Exception
      */
     public function getSegment($id)
     {
@@ -36,7 +36,7 @@ class SegmentRepository extends RepositoryBase
      * @param array $sort
      *
      * @return SegmentListView[]
-     * @throws \Http\Client\Exception
+     * @throws Exception
      */
     public function listSegments(array $offset = [], array $size = [], array $sort = [])
     {
@@ -50,5 +50,4 @@ class SegmentRepository extends RepositoryBase
             SegmentListView::class . '[]'
         );
     }
-
 }
