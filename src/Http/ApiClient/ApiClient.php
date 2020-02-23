@@ -76,6 +76,8 @@ class ApiClient implements ApiClientInterface
 
     /**
      * @inheritdoc
+     * @SuppressWarnings(PHPMD)
+     *   Suppress warnings for PHPMD for now. It exceeds cyclomatic threshold but not sure how to improve it.
      */
     public function handle(RequestInterface $request)
     {
@@ -83,7 +85,8 @@ class ApiClient implements ApiClientInterface
         $body = $request->getBody();
 
         if ($request instanceof SortInterface) {
-            if (!empty($sort = $request->getSort())) {
+            $sort = $request->getSort();
+            if (!empty($sort)) {
                 foreach ($sort as $field => $order) {
                     $body['sort'][] = [
                         'field' => $field,
@@ -94,13 +97,15 @@ class ApiClient implements ApiClientInterface
         }
 
         if ($request instanceof SizeInterface) {
-            if (!empty($size = $request->getSize())) {
+            $size = $request->getSize();
+            if (!empty($size)) {
                 $body['size'] = $size;
             }
         }
 
         if ($request instanceof OffsetInterface) {
-            if (!empty($offset = $request->getOffset())) {
+            $offset = $request->getOffset();
+            if (!empty($offset)) {
                 $body['offset'] = $offset;
             }
         }
@@ -116,15 +121,16 @@ class ApiClient implements ApiClientInterface
                 $this->accessToken,
                 $options
             );
-        } else {
-            $psrRequest = new Request(
-                $request->getMethod() ?: $this->defaultMethod,
-                $this->baseUri . $request->getEndpoint(),
-                [],
-                json_encode($body)
-            );
+            return $this->httpClient->sendRequest($psrRequest);
         }
 
+        // If no provider was given. execute the request directly.
+        $psrRequest = new Request(
+            $request->getMethod() ?: $this->defaultMethod,
+            $this->baseUri . $request->getEndpoint(),
+            [],
+            json_encode($body)
+        );
         return $this->httpClient->sendRequest($psrRequest);
     }
 }

@@ -40,6 +40,8 @@ class FieldDescriptionDenormalizer implements
 
     /**
      * @inheritdoc
+     * @SuppressWarnings(PHPMD)
+     *   Suppress warnings for PHPMD as it can't handle the dynamic class loading.
      */
     public function denormalize(
         $data,

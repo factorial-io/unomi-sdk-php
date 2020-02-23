@@ -6,6 +6,7 @@ namespace Dropsolid\UnomiSdkPhp\Model\Segment;
  * Class Segment
  *
  * @package Dropsolid\UnomiSdkPhp\Model\Segment
+ * @SuppressWarnings(PHPCPD)
  */
 class SegmentMetadata
 {

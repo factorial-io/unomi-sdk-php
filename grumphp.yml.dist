@@ -12,7 +12,7 @@ parameters:
             whitelist_patterns:
                 - /^src\/(.*)/
         phpcpd:
-            exclude: ['tests' ,'vendor', 'examples']
+            exclude: ['tests' ,'vendor', 'examples', 'Model']
         phpcs: ~
         phpmd:
             whitelist_patterns:

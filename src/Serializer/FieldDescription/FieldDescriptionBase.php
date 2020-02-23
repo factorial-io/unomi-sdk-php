@@ -14,14 +14,14 @@ abstract class FieldDescriptionBase implements FieldDescriptionInterface
     /**
      * @var CamelCaseToSnakeCaseNameConverter
      */
-    protected $camelCaseToSnakeCaseNameConverter;
+    protected $camelToSnakeNameConverter;
 
     /**
      * FieldDescriptionBase constructor.
      */
     public function __construct()
     {
-        $this->camelCaseToSnakeCaseNameConverter = new CamelCaseToSnakeCaseNameConverter(null, false);
+        $this->camelToSnakeNameConverter = new CamelCaseToSnakeCaseNameConverter(null, false);
     }
 
     /**
@@ -68,7 +68,7 @@ abstract class FieldDescriptionBase implements FieldDescriptionInterface
      */
     protected function toUpperCamelCase($string)
     {
-        return $this->camelCaseToSnakeCaseNameConverter->denormalize($string);
+        return $this->camelToSnakeNameConverter->denormalize($string);
     }
 
     /**
