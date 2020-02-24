@@ -15,18 +15,18 @@ trait MultipleMethodsTrait
     protected $method;
 
     /**
-     * @param string $method
-     */
-    public function setMethod($method)
-    {
-        $this->method = $method;
-    }
-
-    /**
      * @return null|string
      */
     public function getMethod()
     {
         return $this->method ?: parent::getMethod();
+    }
+
+    /**
+     * @param string $method
+     */
+    public function setMethod($method)
+    {
+        $this->method = $method;
     }
 }

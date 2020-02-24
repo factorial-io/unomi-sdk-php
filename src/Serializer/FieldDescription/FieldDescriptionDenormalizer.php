@@ -49,6 +49,7 @@ class FieldDescriptionDenormalizer implements
         string $format = null,
         array $context = []
     ) {
+    
         $fieldDescription = $this->getFieldDescriptionByClassName($class);
         $className = $fieldDescription->getTargetClass();
         $object = new $className;
@@ -70,6 +71,22 @@ class FieldDescriptionDenormalizer implements
             $object->{$field->getSetter()}($value);
         }
         return $object;
+    }
+
+    /**
+     * @param string $className
+     *
+     * @return FieldDescriptionInterface|null
+     */
+    protected function getFieldDescriptionByClassName($className)
+    {
+        foreach ($this->fieldDescriptions as $fieldDescription) {
+            if ($fieldDescription->getTargetClass() === $className) {
+                return $fieldDescription;
+            }
+        }
+
+        return null;
     }
 
     /**
@@ -114,21 +131,5 @@ class FieldDescriptionDenormalizer implements
     {
         return is_object($data)
             && $this->getFieldDescriptionByClassName(get_class($data)) !== null;
-    }
-
-    /**
-     * @param string $className
-     *
-     * @return FieldDescriptionInterface|null
-     */
-    protected function getFieldDescriptionByClassName($className)
-    {
-        foreach ($this->fieldDescriptions as $fieldDescription) {
-            if ($fieldDescription->getTargetClass() === $className) {
-                return $fieldDescription;
-            }
-        }
-
-        return null;
     }
 }

@@ -35,6 +35,7 @@ class Unomi
         ApiClientInterface $apiClient,
         SerializerInterface $serializer
     ) {
+    
         $this->apiClient = $apiClient;
         $this->serializer = $serializer;
     }

@@ -14,6 +14,14 @@ class SegmentListViewFieldDescription extends SegmentListViewFieldDescriptionBas
     /**
      * @inheritdoc
      */
+    public function getTargetClass()
+    {
+        return SegmentListView::class;
+    }
+
+    /**
+     * @inheritdoc
+     */
     protected function getFieldMapping()
     {
         $fields = [
@@ -23,13 +31,5 @@ class SegmentListViewFieldDescription extends SegmentListViewFieldDescriptionBas
             parent::getFieldMapping(),
             $fields
         );
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getTargetClass()
-    {
-        return SegmentListView::class;
     }
 }

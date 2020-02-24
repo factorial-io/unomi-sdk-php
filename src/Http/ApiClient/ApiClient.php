@@ -2,14 +2,14 @@
 
 namespace Dropsolid\UnomiSdkPhp\Http\ApiClient;
 
+use Dropsolid\UnomiSdkPhp\Request\Attributes\Offset\OffsetInterface;
+use Dropsolid\UnomiSdkPhp\Request\Attributes\Size\SizeInterface;
+use Dropsolid\UnomiSdkPhp\Request\Attributes\Sort\SortInterface;
+use Dropsolid\UnomiSdkPhp\Request\RequestInterface;
 use GuzzleHttp\Psr7\Request;
 use Http\Client\HttpClient;
 use League\OAuth2\Client\Provider\AbstractProvider;
 use League\OAuth2\Client\Token\AccessToken;
-use Dropsolid\UnomiSdkPhp\Request\Attributes\Sort\SortInterface;
-use Dropsolid\UnomiSdkPhp\Request\Attributes\Offset\OffsetInterface;
-use Dropsolid\UnomiSdkPhp\Request\Attributes\Size\SizeInterface;
-use Dropsolid\UnomiSdkPhp\Request\RequestInterface;
 use League\OAuth2\Client\Token\AccessTokenInterface;
 
 /**
@@ -61,6 +61,7 @@ class ApiClient implements ApiClientInterface
         AccessTokenInterface $accessToken,
         array $options = []
     ) {
+    
         $this->httpClient = $httpClient;
         $this->provider = $provider;
         $this->accessToken = $accessToken;

@@ -15,18 +15,18 @@ trait OffsetTrait
     protected $offset;
 
     /**
-     * @param array $offset
-     */
-    public function setOffset(array $offset = [])
-    {
-        $this->offset = $offset;
-    }
-
-    /**
      * @return array
      */
     public function getOffset()
     {
         return $this->offset;
+    }
+
+    /**
+     * @param array $offset
+     */
+    public function setOffset(array $offset = [])
+    {
+        $this->offset = $offset;
     }
 }

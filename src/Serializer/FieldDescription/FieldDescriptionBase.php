@@ -38,6 +38,11 @@ abstract class FieldDescriptionBase implements FieldDescriptionInterface
     }
 
     /**
+     * @return array
+     */
+    abstract protected function getFieldMapping();
+
+    /**
      * @param string|int $key
      * @param array|string $value
      * @return Field
@@ -70,9 +75,4 @@ abstract class FieldDescriptionBase implements FieldDescriptionInterface
     {
         return $this->camelToSnakeNameConverter->denormalize($string);
     }
-
-    /**
-     * @return array
-     */
-    abstract protected function getFieldMapping();
 }

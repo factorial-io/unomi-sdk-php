@@ -2,8 +2,8 @@
 
 namespace Dropsolid\UnomiSdkPhp\Serializer;
 
-use Dropsolid\UnomiSdkPhp\Serializer\FieldDescription\FieldDescriptionDenormalizer;
 use Dropsolid\UnomiSdkPhp\Serializer\FieldDescription;
+use Dropsolid\UnomiSdkPhp\Serializer\FieldDescription\FieldDescriptionDenormalizer;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ArrayDenormalizer;
 use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;

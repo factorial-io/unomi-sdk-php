@@ -43,6 +43,7 @@ class Field
         $setter = null,
         $targetClass = null
     ) {
+    
         $this->name = $name;
         $this->getter = $getter;
         $this->setter = $setter;

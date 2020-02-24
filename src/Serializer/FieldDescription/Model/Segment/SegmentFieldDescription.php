@@ -14,6 +14,14 @@ class SegmentFieldDescription extends SegmentFieldDescriptionBase
     /**
      * @inheritdoc
      */
+    public function getTargetClass()
+    {
+        return Segment::class;
+    }
+
+    /**
+     * @inheritdoc
+     */
     protected function getFieldMapping()
     {
         $fields = [
@@ -23,13 +31,5 @@ class SegmentFieldDescription extends SegmentFieldDescriptionBase
             parent::getFieldMapping(),
             $fields
         );
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getTargetClass()
-    {
-        return Segment::class;
     }
 }

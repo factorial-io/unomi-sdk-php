@@ -39,31 +39,21 @@ abstract class RepositoryBase
         ApiClientInterface $apiClient,
         SerializerInterface $serializer
     ) {
+    
         $this->apiClient = $apiClient;
         $this->serializer = $serializer;
     }
 
     /**
      * @param $data
-     * @param $type
-     *
-     * @return mixed
-     */
-    protected function deserialize($data, $type)
-    {
-        return $this->serializer->deserialize($data, $type, 'json');
-    }
-
-    /**
-     * @param $data
      * @param array $context
-     * @throws InvalidArgumentException   Occurs when the object given is not a supported type for the normalizer
+     * @return string|array
      * @throws CircularReferenceException Occurs when the normalizer detects a circular reference when no circular
      *                                    reference handler can fix it
      * @throws LogicException             Occurs when the normalizer is not called in an expected context
      * @throws ExceptionInterface         Occurs for all the other cases of errors
      *
-     * @return string|array
+     * @throws InvalidArgumentException   Occurs when the object given is not a supported type for the normalizer
      */
     protected function normalize($data, $context = array())
     {
@@ -82,5 +72,16 @@ abstract class RepositoryBase
         $response = $this->apiClient->handle($request);
         $responseBody = $response->getBody()->getContents();
         return $this->deserialize($responseBody, $responseClass);
+    }
+
+    /**
+     * @param $data
+     * @param $type
+     *
+     * @return mixed
+     */
+    protected function deserialize($data, $type)
+    {
+        return $this->serializer->deserialize($data, $type, 'json');
     }
 }

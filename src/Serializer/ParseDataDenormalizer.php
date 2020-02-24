@@ -26,6 +26,7 @@ class ParseDataDenormalizer implements
         string $format = null,
         array $context = []
     ) {
+    
         return $this->denormalizer->denormalize(
             $data['data'],
             $class,

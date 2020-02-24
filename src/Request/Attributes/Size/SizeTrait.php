@@ -15,18 +15,18 @@ trait SizeTrait
     protected $size;
 
     /**
-     * @param array $size
-     */
-    public function setSize(array $size = [])
-    {
-        $this->size = $size;
-    }
-
-    /**
      * @return array
      */
     public function getSize()
     {
         return $this->size;
+    }
+
+    /**
+     * @param array $size
+     */
+    public function setSize(array $size = [])
+    {
+        $this->size = $size;
     }
 }
