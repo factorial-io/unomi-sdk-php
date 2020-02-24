@@ -22,11 +22,11 @@ class ParseDataDenormalizer implements
      */
     public function denormalize(
         $data,
-        string $class,
-        string $format = null,
+        $class,
+        $format = null,
         array $context = []
     ) {
-    
+
         return $this->denormalizer->denormalize(
             $data['data'],
             $class,
@@ -38,7 +38,7 @@ class ParseDataDenormalizer implements
     /**
      * @inheritdoc
      */
-    public function supportsDenormalization($data, string $type, string $format = null)
+    public function supportsDenormalization($data, $type, $format = null)
     {
         return isset($data['data']) && count($data) === 1;
     }
