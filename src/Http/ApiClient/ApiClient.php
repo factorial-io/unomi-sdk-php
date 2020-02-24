@@ -58,10 +58,10 @@ class ApiClient implements ApiClientInterface
     public function __construct(
         $provider,
         HttpClient $httpClient,
-        AccessTokenInterface $accessToken,
+        $accessToken,
         array $options = []
     ) {
-    
+
         $this->httpClient = $httpClient;
         $this->provider = $provider;
         $this->accessToken = $accessToken;
