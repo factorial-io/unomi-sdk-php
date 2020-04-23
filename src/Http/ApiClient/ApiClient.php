@@ -42,7 +42,7 @@ class ApiClient implements ApiClientInterface
     /**
      * @var string Unomi Base URL to use
      */
-    private $baseUri = 'https://unomi.poc.qa.dropsolid-sites.com/';
+    private $baseUri = '';
 
     /**
      * ApiClient constructor.
@@ -117,7 +117,7 @@ class ApiClient implements ApiClientInterface
         if (!empty($body)) {
             $body = json_encode($body);
         }
-        
+
         if ($this->provider) {
             // Set the body.
             if (!empty($body)) {
@@ -125,7 +125,7 @@ class ApiClient implements ApiClientInterface
             }
             // Set the headers.
             $options['headers'] = $headers;
-            
+
             $psrRequest = $this->provider->getAuthenticatedRequest(
                 $request->getMethod() ?: $this->defaultMethod,
                 $this->baseUri . $request->getEndpoint(),
