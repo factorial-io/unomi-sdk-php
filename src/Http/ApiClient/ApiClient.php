@@ -111,11 +111,21 @@ class ApiClient implements ApiClientInterface
             }
         }
 
-        if (!empty($body)) {
-            $options['body'] = json_encode($body);
-        }
+        // Always request application/json
+        $headers = ['Accept' => 'application/json'];
 
+        if (!empty($body)) {
+            $body = json_encode($body);
+        }
+        
         if ($this->provider) {
+            // Set the body.
+            if (!empty($body)) {
+                $options['body'] = $body;
+            }
+            // Set the headers.
+            $options['headers'] = $headers;
+            
             $psrRequest = $this->provider->getAuthenticatedRequest(
                 $request->getMethod() ?: $this->defaultMethod,
                 $this->baseUri . $request->getEndpoint(),
@@ -129,8 +139,8 @@ class ApiClient implements ApiClientInterface
         $psrRequest = new Request(
             $request->getMethod() ?: $this->defaultMethod,
             $this->baseUri . $request->getEndpoint(),
-            [],
-            json_encode($body)
+            $headers,
+            $body
         );
         return $this->httpClient->sendRequest($psrRequest);
     }
