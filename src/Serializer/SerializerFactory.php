@@ -26,6 +26,10 @@ class SerializerFactory
                 // Segment
                 new FieldDescription\Model\Segment\SegmentFieldDescription(),
                 new FieldDescription\Model\Segment\SegmentListViewFieldDescription(),
+                new FieldDescription\Model\Rules\RulesListViewFieldDescription(),
+                new FieldDescription\Model\Rules\RulesStatisticsViewFieldDescription(),
+                new FieldDescription\Model\Profile\ProfileSearchFieldDescription(),
+                new FieldDescription\Model\Events\EventsFieldDescription(),
             ]
         );
 
