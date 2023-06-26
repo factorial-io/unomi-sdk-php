@@ -135,6 +135,11 @@ class ApiClient implements ApiClientInterface
             return $this->httpClient->sendRequest($psrRequest);
         }
 
+        // The body can't be an empty array.
+        if (empty($body)) {
+          $body = NULL;
+        }
+
         // If no provider was given. execute the request directly.
         $psrRequest = new Request(
             $request->getMethod() ?: $this->defaultMethod,
